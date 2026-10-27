@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Appointment | Toothwise Dental Studio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="topbar">
+        <div class="container nav">
+            <div class="brand" aria-label="Toothwise Dental Studio home">
+                <div class="brand-mark">T</div>
+                <div class="brand-text">
+                    <strong>Toothwise</strong>
+                    <small>Dental Studio</small>
+                </div>
+            </div>
+
+            <nav aria-label="Main navigation">
+                <ul class="nav-menu">
+                    <li><a href="HOME%20.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="booking.html">Booking</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="login.html">Login</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <a class="primary-btn" href="login.html">Patient login</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-hero">
+            <div class="container page-hero-inner">
+                <span class="eyebrow">Book an appointment</span>
+                <h1>We make scheduling simple and stress-free.</h1>
+                <p>Share your details and we will confirm the best appointment time for your dental care needs.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container booking-layout">
+                <div class="booking-info">
+                    <span class="eyebrow">Why book with us?</span>
+                    <h2>Friendly care, straightforward scheduling.</h2>
+                    <p>We welcome new and returning patients and aim to make every visit comfortable, clear, and efficient.</p>
+
+                    <div class="contact-points">
+                        <div class="contact-point"><span>📍</span> Mokopane, Limpopo</div>
+                        <div class="contact-point"><span>📞</span> +27 12 345 6789</div>
+                        <div class="contact-point"><span>✉️</span> info@toothwise.co.za</div>
+                    </div>
+                </div>
+
+                <form class="booking-form" id="bookingForm" onsubmit="bookAppointment(event)">
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label for="name">Full Name</label>
+                            <input id="name" type="text" placeholder="Your name" required>
+                        </div>
+                        <div class="form-field">
+                            <label for="email">Email Address</label>
+                            <input id="email" type="email" placeholder="Your email" required>
+                        </div>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="date">Preferred Date</label>
+                        <input id="date" type="date" required>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="message">Message</label>
+                        <textarea id="message" placeholder="Tell us how we can help..."></textarea>
+                    </div>
+
+                    <div id="confirmationMessage" class="confirmation-message" style="display: none;">
+                        <strong>Appointment submitted successfully.</strong>
+                        <p>Thank you for booking with Toothwise Dental Studio. Our team will contact you soon to confirm your appointment.</p>
+                    </div>
+
+                    <button class="submit-btn" type="submit">Submit Booking</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="HOME%20.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="services.html">Services</a>
+                <a href="booking.html">Booking</a>
+                <a href="contact.html">Contact</a>
+                <a href="login.html">Login</a>
+            </div>
+            <p>© 2026 Toothwise Dental Studio. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        if (localStorage.getItem('toothwise_logged_in') !== 'true') {
+            alert('Please log in before booking an appointment.');
+            window.location.href = 'login.html';
+        }
+
+        function getNextAvailableSlot(dateValue) {
+            const baseDate = dateValue ? new Date(dateValue + 'T00:00:00') : new Date();
+            const slotOptions = ['09:00 AM', '10:30 AM', '12:00 PM', '02:00 PM', '04:30 PM'];
+
+            if (Number.isNaN(baseDate.getTime())) {
+                return 'Monday, 09:00 AM';
+            }
+
+            const formattedDate = baseDate.toLocaleDateString('en-ZA', {
+                weekday: 'long',
+                day: 'numeric',
+                month: 'short',
+                year: 'numeric'
+            });
+
+            const slot = slotOptions[baseDate.getDate() % slotOptions.length];
+            return `${formattedDate} at ${slot}`;
+        }
+
+        function bookAppointment(event) {
+            event.preventDefault();
+
+            const dateValue = document.getElementById('date').value;
+            const confirmationMessage = document.getElementById('confirmationMessage');
+            const nextSlot = getNextAvailableSlot(dateValue);
+
+            confirmationMessage.innerHTML = `
+                <strong>Appointment submitted successfully.</strong>
+                <p>Thank you for booking with Toothwise Dental Studio. Our team will contact you soon to confirm your appointment.</p>
+                <p><strong>Next available slot:</strong> ${nextSlot}</p>
+            `;
+
+            confirmationMessage.style.display = 'block';
+            event.target.reset();
+        }
+    </script>
+</body>
+</html>

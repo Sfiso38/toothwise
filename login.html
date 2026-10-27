@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Toothwise Dental Studio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="topbar">
+        <div class="container nav">
+            <div class="brand" aria-label="Toothwise Dental Studio home">
+                <div class="brand-mark">T</div>
+                <div class="brand-text">
+                    <strong>Toothwise</strong>
+                    <small>Dental Studio</small>
+                </div>
+            </div>
+
+            <nav aria-label="Main navigation">
+                <ul class="nav-menu">
+                    <li><a href="HOME%20.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="booking.html">Booking</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="login.html">Login</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <a class="primary-btn" href="booking.html">Book now</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="login-page">
+        <div class="container">
+            <div class="login-panel">
+                <span class="eyebrow">Patient portal</span>
+                <h2>Welcome back</h2>
+                <p class="login-intro">Log in to manage appointments, review treatment plans, and access your dental information securely.</p>
+
+                <div class="instructions">
+                    <h3>Login instructions</h3>
+                    <ol>
+                        <li>Enter the email address you used during registration.</li>
+                        <li>Use the password provided by our reception team or created during onboarding.</li>
+                        <li>If you are a new patient, contact the clinic for your first-time login details.</li>
+                        <li>To book an appointment, you must log in first.</li>
+                        <li>Click the login button to continue to your appointment page.</li>
+                    </ol>
+                </div>
+
+                <form id="loginForm">
+                    <div class="form-field">
+                        <label for="username">Email address</label>
+                        <input id="username" type="email" placeholder="you@example.com" required>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="password">Password</label>
+                        <input id="password" type="password" placeholder="Enter your password" required>
+                    </div>
+
+                    <button class="submit-btn" type="submit">Login</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="HOME%20.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="services.html">Services</a>
+                <a href="booking.html">Booking</a>
+                <a href="contact.html">Contact</a>
+                <a href="login.html">Login</a>
+            </div>
+            <p>© 2026 Toothwise Dental Studio. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const loginForm = document.getElementById('loginForm');
+
+        if (localStorage.getItem('toothwise_logged_in') === 'true') {
+            window.location.href = 'booking.html';
+        }
+
+        loginForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const email = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+
+            if (!email || !password) {
+                alert('Please enter both your email and password.');
+                return;
+            }
+
+            localStorage.setItem('toothwise_logged_in', 'true');
+            localStorage.setItem('toothwise_user_email', email);
+
+            alert('Login successful. You can now book an appointment.');
+            window.location.href = 'booking.html';
+        });
+    </script>
+</body>
+</html>

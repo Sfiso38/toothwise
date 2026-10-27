@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Toothwise Dental Studio</title>
+
+<style>
+:root {
+    --primary: #0a7db8;
+    --primary-dark: #075b8e;
+    --primary-soft: #dff4ff;
+    --accent: #f7c85f;
+    --text: #1f2a37;
+    --muted: #5d6b7a;
+    --bg: #f5fbff;
+    --white: #ffffff;
+    --card-shadow: 0 18px 40px rgba(10, 125, 184, 0.12);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: linear-gradient(180deg, #f4fbff 0%, #edf7ff 100%);
+    color: var(--text);
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+.container {
+    width: min(1120px, calc(100% - 32px));
+    margin: 0 auto;
+}
+
+.topbar {
+    background: rgba(10, 125, 184, 0.95);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    box-shadow: 0 10px 30px rgba(4, 70, 110, 0.12);
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 80px;
+    gap: 20px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--white);
+}
+
+.brand-mark {
+    width: 42px;
+    height: 42px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #ffffff 0%, #dff4ff 100%);
+    color: var(--primary);
+    display: grid;
+    place-items: center;
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.brand-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+}
+
+.brand-text strong {
+    font-size: 1.1rem;
+}
+
+.brand-text small {
+    font-size: 0.72rem;
+    opacity: 0.8;
+}
+
+.nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    list-style: none;
+}
+
+.nav-menu a {
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+.nav-menu a:hover {
+    color: var(--white);
+}
+
+.nav-cta,
+.primary-btn,
+.secondary-btn,
+.submit-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    padding: 0.9rem 1.4rem;
+    font-weight: 700;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.nav-cta,
+.primary-btn,
+.submit-btn {
+    background: linear-gradient(135deg, var(--accent) 0%, #f4b840 100%);
+    color: #203041;
+    box-shadow: 0 10px 25px rgba(244, 184, 64, 0.3);
+}
+
+.secondary-btn {
+    background: rgba(255, 255, 255, 0.12);
+    color: var(--white);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.nav-cta:hover,
+.primary-btn:hover,
+.secondary-btn:hover,
+.submit-btn:hover {
+    transform: translateY(-2px);
+}
+
+.hero {
+    padding: 72px 0 44px;
+    background:
+        linear-gradient(180deg, rgba(12, 161, 219, 0.94) 0%, rgba(11, 110, 174, 0.96) 38%, rgba(9, 74, 124, 1) 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at 30% 20%, rgba(255,255,255,0.7), transparent 16%),
+        radial-gradient(circle at 68% 28%, rgba(142, 225, 255, 0.38), transparent 12%),
+        radial-gradient(circle at 50% 70%, rgba(255,255,255,0.15), transparent 32%);
+    pointer-events: none;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    right: 8%;
+    top: 12%;
+    width: 360px;
+    height: 360px;
+    border-radius: 38% 62% 55% 45% / 48% 38% 62% 52%;
+    background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(233,245,255,0.96));
+    box-shadow: inset -18px -18px 25px rgba(12, 88, 135, 0.12), 0 24px 42px rgba(7, 47, 76, 0.18);
+    transform: rotate(18deg);
+    opacity: 0.96;
+    pointer-events: none;
+}
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: center;
+    gap: 52px;
+}
+
+.eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(10, 125, 184, 0.08);
+    color: var(--primary-dark);
+    border: 1px solid rgba(10, 125, 184, 0.15);
+    border-radius: 999px;
+    padding: 0.45rem 0.9rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.hero-copy h1 {
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    line-height: 1.08;
+    color: #f4fbff;
+    margin: 20px 0 14px;
+    text-shadow: 0 3px 18px rgba(7, 37, 63, 0.15);
+}
+
+.hero-copy h1 span {
+    color: #dff8ff;
+}
+
+.hero-copy > p {
+    font-size: 1.08rem;
+    color: rgba(240, 250, 255, 0.94);
+    max-width: 560px;
+}
+
+.hero-actions {
+    margin-top: 28px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.trust-row {
+    margin-top: 26px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.trust-box {
+    min-width: 120px;
+    background: rgba(255, 255, 255, 0.75);
+    border: 1px solid rgba(10, 125, 184, 0.08);
+    border-radius: 18px;
+    padding: 16px 18px;
+    box-shadow: 0 12px 26px rgba(22, 60, 96, 0.06);
+}
+
+.trust-box strong {
+    display: block;
+    color: var(--primary-dark);
+    font-size: 1.2rem;
+}
+
+.trust-box span {
+    font-size: 0.82rem;
+    color: var(--muted);
+}
+
+.hero-visual {
+    display: flex;
+    justify-content: center;
+}
+
+.dental-card {
+    position: relative;
+    width: min(100%, 470px);
+    height: 540px;
+    border-radius: 32px;
+    background: linear-gradient(135deg, rgba(11, 161, 219, 0.96) 0%, rgba(10, 102, 170, 0.96) 45%, rgba(8, 74, 124, 1) 100%);
+    box-shadow: 0 25px 50px rgba(5, 54, 89, 0.22);
+    overflow: hidden;
+    padding: 24px;
+}
+
+.dental-card::before {
+    content: "";
+    position: absolute;
+    inset: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 30px;
+}
+
+.dental-card::after {
+    content: "";
+    position: absolute;
+    right: 8%;
+    top: 26%;
+    width: 260px;
+    height: 250px;
+    background: linear-gradient(180deg, #ffffff 0%, #edfaff 100%);
+    border-radius: 46% 54% 56% 44% / 34% 30% 70% 66%;
+    box-shadow: inset -18px -14px 24px rgba(15, 98, 154, 0.1), 0 18px 30px rgba(8, 66, 108, 0.12);
+    transform: rotate(18deg);
+    opacity: 0.98;
+}
+
+.smile-illustration {
+    position: absolute;
+    inset: 90px 50px 50px 50px;
+    border-radius: 28px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.2), rgba(255,255,255,0.1));
+    display: grid;
+    place-items: center;
+}
+
+.tooth {
+    position: relative;
+    width: 120px;
+    height: 160px;
+    background: linear-gradient(180deg, #fff 0%, #dfeefc 100%);
+    border-radius: 28px 28px 36px 36px;
+    box-shadow: inset 0 0 0 4px rgba(255,255,255,0.4);
+}
+
+.tooth::before,
+.tooth::after {
+    content: "";
+    position: absolute;
+    width: 14px;
+    height: 30px;
+    background: rgba(255,255,255,0.9);
+    border-radius: 10px;
+    top: 12px;
+}
+
+.tooth::before { left: 20px; }
+.tooth::after { right: 20px; }
+
+.tooth-line {
+    position: absolute;
+    width: 220px;
+    height: 100px;
+    border: 6px solid rgba(255,255,255,0.8);
+    border-top: 0;
+    border-radius: 0 0 180px 180px;
+    bottom: 80px;
+}
+
+.info-pill,
+.info-badge {
+    position: absolute;
+    border-radius: 16px;
+    background: rgba(255,255,255,0.95);
+    color: var(--text);
+    box-shadow: 0 10px 24px rgba(7, 40, 64, 0.18);
+}
+
+.info-pill {
+    left: 24px;
+    top: 24px;
+    padding: 0.8rem 1rem;
+    font-weight: 700;
+}
+
+.info-pill small {
+    display: block;
+    font-size: 0.72rem;
+    color: var(--muted);
+    font-weight: 600;
+}
+
+.info-badge {
+    right: 28px;
+    bottom: 24px;
+    padding: 1rem 1.1rem;
+    color: var(--primary-dark);
+    font-weight: 700;
+}
+
+.info-badge span {
+    display: block;
+    font-size: 1.5rem;
+    line-height: 1;
+}
+
+.section {
+    padding: 88px 0;
+}
+
+.section-heading {
+    text-align: center;
+    margin-bottom: 34px;
+}
+
+.section-heading h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin-top: 16px;
+    color: var(--text);
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    align-items: start;
+}
+
+.about-copy {
+    color: var(--muted);
+    font-size: 1.02rem;
+}
+
+.feature-list {
+    display: grid;
+    gap: 18px;
+}
+
+.feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 18px 20px;
+    border-radius: 18px;
+    border: 1px solid rgba(10, 125, 184, 0.08);
+    box-shadow: 0 12px 26px rgba(18, 71, 105, 0.05);
+}
+
+.feature-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+    background: var(--primary-soft);
+    display: grid;
+    place-items: center;
+    font-size: 1.2rem;
+}
+
+.feature-item h3 {
+    margin-bottom: 4px;
+    color: var(--text);
+    font-size: 1.08rem;
+}
+
+.feature-item p {
+    color: var(--muted);
+}
+
+.alt-bg {
+    background: rgba(14, 124, 179, 0.04);
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 22px;
+}
+
+.service-card {
+    background: var(--white);
+    border: 1px solid rgba(10, 125, 184, 0.08);
+    border-radius: 20px;
+    padding: 24px 22px;
+    box-shadow: 0 12px 28px rgba(8, 58, 86, 0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 38px rgba(8, 58, 86, 0.1);
+}
+
+.service-icon {
+    width: 58px;
+    height: 58px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, var(--primary-soft) 0%, #cfeaff 100%);
+    display: grid;
+    place-items: center;
+    font-size: 1.7rem;
+    margin-bottom: 18px;
+}
+
+.service-card h3 {
+    margin-bottom: 8px;
+    color: var(--text);
+}
+
+.service-card p {
+    color: var(--muted);
+}
+
+.booking-layout {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 28px;
+    align-items: center;
+}
+
+.booking-info {
+    background: linear-gradient(180deg, rgba(10,125,184,0.08), rgba(10,125,184,0.03));
+    border: 1px solid rgba(10, 125, 184, 0.08);
+    border-radius: 28px;
+    padding: 28px;
+}
+
+.booking-info h2 {
+    font-size: clamp(2rem, 3vw, 2.5rem);
+    margin: 10px 0 16px;
+    color: var(--text);
+}
+
+.booking-info p {
+    color: var(--muted);
+    margin-bottom: 20px;
+}
+
+.contact-points {
+    display: grid;
+    gap: 14px;
+}
+
+.contact-point {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--text);
+    font-weight: 600;
+}
+
+.contact-point span {
+    width: 36px;
+    height: 36px;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    background: var(--white);
+    box-shadow: 0 8px 18px rgba(15, 91, 146, 0.08);
+}
+
+.booking-form {
+    background: var(--white);
+    border-radius: 26px;
+    padding: 28px;
+    box-shadow: var(--card-shadow);
+    border: 1px solid rgba(10, 125, 184, 0.08);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 700;
+    color: var(--text);
+}
+
+input,
+textarea {
+    width: 100%;
+    border: 1px solid rgba(14, 70, 102, 0.12);
+    background: #f7fbff;
+    border-radius: 14px;
+    padding: 0.95rem 1rem;
+    font-size: 1rem;
+    color: var(--text);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input:focus,
+textarea:focus {
+    outline: none;
+    border-color: rgba(10, 125, 184, 0.55);
+    box-shadow: 0 0 0 4px rgba(10, 125, 184, 0.08);
+}
+
+textarea {
+    resize: vertical;
+    min-height: 120px;
+    margin-top: 8px;
+}
+
+.form-field {
+    margin-bottom: 16px;
+}
+
+.submit-btn {
+    border: none;
+    width: 100%;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 8px;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.contact-card {
+    background: var(--white);
+    border: 1px solid rgba(10, 125, 184, 0.08);
+    border-radius: 22px;
+    padding: 26px 22px;
+    box-shadow: 0 12px 26px rgba(18, 71, 105, 0.05);
+}
+
+.contact-card h3 {
+    margin-bottom: 10px;
+    color: var(--text);
+}
+
+.contact-card p {
+    color: var(--muted);
+}
+
+.gallery-grid,
+.review-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.gallery-card,
+.review-card {
+    background: var(--white);
+    border: 1px solid rgba(10, 125, 184, 0.08);
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: 0 12px 26px rgba(18, 71, 105, 0.05);
+}
+
+.gallery-image {
+    height: 220px;
+    display: grid;
+    place-items: center;
+    font-size: 2.4rem;
+    background: linear-gradient(135deg, #dff4ff 0%, #cfeaff 100%);
+    color: var(--primary-dark);
+    font-weight: 700;
+}
+
+.gallery-card .content,
+.review-card .content {
+    padding: 20px 22px 24px;
+}
+
+.gallery-card h3,
+.review-card h3 {
+    margin-bottom: 10px;
+    color: var(--text);
+}
+
+.gallery-card p,
+.review-card p {
+    color: var(--muted);
+}
+
+.review-card .stars {
+    color: #f4b840;
+    letter-spacing: 0.18em;
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
+
+.faq-list {
+    display: grid;
+    gap: 18px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    background: var(--white);
+    border: 1px solid rgba(10, 125, 184, 0.08);
+    border-radius: 18px;
+    padding: 18px 20px;
+    box-shadow: 0 12px 26px rgba(18, 71, 105, 0.04);
+}
+
+.faq-item summary {
+    cursor: pointer;
+    font-weight: 700;
+    color: var(--text);
+    list-style: none;
+}
+
+.faq-item summary::-webkit-details-marker {
+    display: none;
+}
+
+.faq-item p {
+    margin-top: 12px;
+    color: var(--muted);
+    line-height: 1.7;
+}
+
+.floating-actions {
+    position: fixed;
+    right: 22px;
+    bottom: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 40;
+}
+
+.floating-btn {
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    color: var(--white);
+    font-size: 1.5rem;
+    box-shadow: 0 14px 28px rgba(9, 77, 122, 0.25);
+}
+
+.floating-whatsapp {
+    background: #25d366;
+}
+
+.floating-call {
+    background: var(--primary);
+}
+
+footer {
+    background: #0c527f;
+    color: var(--white);
+    padding: 24px 0;
+    text-align: center;
+}
+
+@media (max-width: 860px) {
+    .nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 20px 0;
+    }
+
+    .nav-menu {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 16px;
+    }
+
+    .hero-grid,
+    .about-grid,
+    .booking-layout,
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dental-card {
+        max-width: 420px;
+        height: 470px;
+    }
+}
+
+@media (max-width: 560px) {
+    .hero {
+        padding-top: 52px;
+    }
+
+    .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .primary-btn,
+    .secondary-btn,
+    .nav-cta,
+    .submit-btn {
+        width: 100%;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .section {
+        padding: 72px 0;
+    }
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+    <div class="container nav">
+        <div class="brand" aria-label="Toothwise Dental Studio home">
+            <div class="brand-mark">T</div>
+            <div class="brand-text">
+                <strong>Toothwise</strong>
+                <small>Dental Studio</small>
+            </div>
+        </div>
+
+        <nav aria-label="Main navigation">
+            <ul class="nav-menu">
+                <li><a href="HOME%20.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="booking.html">Booking</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </nav>
+
+        <div class="header-actions">
+            <a class="primary-btn" href="booking.html">Book now</a>
+        </div>
+    </div>
+</header>
+
+<main>
+    <section class="hero" id="home">
+        <div class="container hero-grid">
+            <div class="hero-copy">
+                <span class="eyebrow">Toothwise Dental Studio</span>
+                <h1>Let Us Help You Get <span>Your Smile Back</span></h1>
+                <p>Professional dental care in Mokopane with Dr T.F. Maponya, offering modern treatment in a friendly and welcoming clinic.</p>
+
+                <div class="hero-actions">
+                    <a class="primary-btn" href="booking.html">Book Appointment</a>
+                    <a class="secondary-btn" href="services.html">Explore Services</a>
+                </div>
+
+                <div class="trust-row" aria-label="Practice highlights">
+                    <div class="trust-box">
+                        <strong>4.9/5</strong>
+                        <span>Patient rating</span>
+                    </div>
+                    <div class="trust-box">
+                        <strong>2,500+</strong>
+                        <span>Smiles cared for</span>
+                    </div>
+                    <div class="trust-box">
+                        <strong>Modern</strong>
+                        <span>Gentle techniques</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-visual" aria-hidden="true">
+                <div class="dental-card">
+                    <div class="info-pill">
+                        Open 6 days a week
+                        <small>Mon - Sat</small>
+                    </div>
+                    <div class="smile-illustration">
+                        <div class="tooth-line"></div>
+                        <div class="tooth"></div>
+                    </div>
+                    <div class="info-badge">
+                        <span>Same-day</span>
+                        emergency care
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="about">
+        <div class="container">
+            <div class="section-heading">
+                <span class="eyebrow">About us</span>
+                <h2>Modern dentistry with a personal touch</h2>
+            </div>
+
+            <div class="about-grid">
+                <div class="about-copy">
+                    <p>Toothwise Dental Studio provides professional dental care with a focus on comfort, prevention, and lasting results. From routine check-ups to advanced restorative treatment, we make every visit simple, supportive, and stress-free.</p>
+                </div>
+
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <div class="feature-icon">✔</div>
+                        <div>
+                            <h3>Comfort-first care</h3>
+                            <p>Friendly support from the moment you walk in.</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-item">
+                        <div class="feature-icon">🦷</div>
+                        <div>
+                            <h3>Comprehensive services</h3>
+                            <p>General, cosmetic, and restorative solutions in one place.</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-item">
+                        <div class="feature-icon">💬</div>
+                        <div>
+                            <h3>Clear communication</h3>
+                            <p>We explain every step so you feel informed and confident.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section alt-bg" id="services">
+        <div class="container">
+            <div class="section-heading">
+                <span class="eyebrow">Our services</span>
+                <h2>Dental care tailored to your smile</h2>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">✨</div>
+                    <h3>Braces</h3>
+                    <p>Personalised alignment plans for a straighter, healthier smile.</p>
+                    <strong>From R2,200</strong>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🌟</div>
+                    <h3>Teeth Whitening</h3>
+                    <p>Safe whitening solutions to brighten and refresh your smile.</p>
+                    <strong>From R1,500</strong>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🩺</div>
+                    <h3>Dental Consultation</h3>
+                    <p>Expert advice and treatment planning for your oral health journey.</p>
+                    <strong>From R350</strong>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🛠️</div>
+                    <h3>Tooth Filling</h3>
+                    <p>Effective restorations that repair decay and restore function.</p>
+                    <strong>From R800</strong>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🦷</div>
+                    <h3>Fake Teeth (Dentures)</h3>
+                    <p>Comfortable, natural-looking dental replacements tailored to you.</p>
+                    <strong>From R3,500</strong>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🔧</div>
+                    <h3>Root Canal Treatment</h3>
+                    <p>Gentle treatment designed to save damaged teeth and relieve pain.</p>
+                    <strong>From R2,800</strong>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">💎</div>
+                    <h3>Implants</h3>
+                    <p>Long-lasting tooth replacement solutions for confident daily living.</p>
+                    <strong>From R7,500</strong>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🏅</div>
+                    <h3>Crown &amp; Bridges</h3>
+                    <p>Durable restorations that strengthen and improve your bite.</p>
+                    <strong>From R4,200</strong>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">✨</div>
+                    <h3>Veneers</h3>
+                    <p>Cosmetic treatment that enhances the appearance of your smile.</p>
+                    <strong>From R3,200</strong>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🌈</div>
+                    <h3>Smile Makeover</h3>
+                    <p>Complete smile transformations focused on aesthetics and confidence.</p>
+                    <strong>From R6,000</strong>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🧼</div>
+                    <h3>Teeth Cleaning</h3>
+                    <p>Professional hygiene care to maintain strong, healthy teeth.</p>
+                    <strong>From R450</strong>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🎯</div>
+                    <h3>Smile Design</h3>
+                    <p>Custom treatment planning for a balanced, natural-looking smile.</p>
+                    <strong>From R2,000</strong>
+                </div>
+            </div>
+
+            <p class="service-note" style="margin-top: 24px; color: #5d6b7a; text-align: center; font-weight: 600;">Prices are in South African Rand and may vary depending on the treatment, time required, and patient needs.</p>
+        </div>
+    </section>
+
+    <section class="section" id="booking">
+        <div class="container booking-layout">
+            <div class="booking-info">
+                <span class="eyebrow">Book an appointment</span>
+                <h2>We make scheduling simple and stress-free.</h2>
+                <p>Tell us a little about your needs and we’ll be in touch to confirm your visit. We offer friendly support for new and returning patients.</p>
+
+                <div class="contact-points">
+                    <div class="contact-point"><span>📍</span> Mokopane, Limpopo</div>
+                    <div class="contact-point"><span>📞</span> +27 66 604 0199</div>
+                    <div class="contact-point"><span>📞</span> +27 66 376 3276</div>
+                    <div class="contact-point"><span>✉️</span> info@toothwise.co.za</div>
+                </div>
+            </div>
+
+            <form class="booking-form" onsubmit="bookAppointment(event)">
+                <div class="form-row">
+                    <div class="form-field">
+                        <label for="name">Full Name</label>
+                        <input id="name" type="text" placeholder="Your name" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="email">Email Address</label>
+                        <input id="email" type="email" placeholder="Your email" required>
+                    </div>
+                </div>
+
+                <div class="form-field">
+                    <label for="date">Preferred Date</label>
+                    <input id="date" type="date" required>
+                </div>
+
+                <div class="form-field">
+                    <label for="message">Message</label>
+                    <textarea id="message" placeholder="Tell us how we can help..."></textarea>
+                </div>
+
+                <button class="submit-btn" type="submit">Submit Booking</button>
+            </form>
+        </div>
+    </section>
+
+    <section class="section alt-bg" id="gallery">
+        <div class="container">
+            <div class="section-heading">
+                <span class="eyebrow">Smile gallery</span>
+                <h2>Before and after results</h2>
+            </div>
+
+            <div class="gallery-grid">
+                <div class="gallery-card">
+                    <div class="gallery-image">Before</div>
+                    <div class="content">
+                        <h3>Whitening case</h3>
+                        <p>Brightening a stained smile for a more confident look.</p>
+                    </div>
+                </div>
+
+                <div class="gallery-card">
+                    <div class="gallery-image">After</div>
+                    <div class="content">
+                        <h3>Smile restoration</h3>
+                        <p>Healthy, even results that help patients feel proud of their smile.</p>
+                    </div>
+                </div>
+
+                <div class="gallery-card">
+                    <div class="gallery-image">Smile</div>
+                    <div class="content">
+                        <h3>Smile makeover</h3>
+                        <p>Cosmetic treatment designed around the patient’s natural features.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="testimonials">
+        <div class="container">
+            <div class="section-heading">
+                <span class="eyebrow">Testimonials</span>
+                <h2>Patients love their results</h2>
+            </div>
+
+            <div class="review-grid">
+                <div class="review-card">
+                    <div class="content">
+                        <div class="stars">★★★★★</div>
+                        <p>“The clinic was warm, clean, and very professional. My teeth look amazing and I felt comfortable throughout the whole process.”</p>
+                        <h3>Thabo M.</h3>
+                    </div>
+                </div>
+
+                <div class="review-card">
+                    <div class="content">
+                        <div class="stars">★★★★★</div>
+                        <p>“I booked online easily and the staff were friendly and helpful. The treatment was explained clearly and the results were excellent.”</p>
+                        <h3>Leah N.</h3>
+                    </div>
+                </div>
+
+                <div class="review-card">
+                    <div class="content">
+                        <div class="stars">★★★★★</div>
+                        <p>“Very happy with the care I received. Their smile design plan gave me so much confidence.”</p>
+                        <h3>Karabo P.</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section alt-bg" id="faq">
+        <div class="container">
+            <div class="section-heading">
+                <span class="eyebrow">FAQ</span>
+                <h2>Common questions</h2>
+            </div>
+
+            <div class="faq-list">
+                <details class="faq-item" open>
+                    <summary>Do I need to book before visiting?</summary>
+                    <p>Yes, booking is recommended so we can confirm your visit and allocate the right amount of time for your consultation or treatment.</p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Do you treat new patients?</summary>
+                    <p>Absolutely. We welcome new patients and offer friendly consultations to help you start your dental care journey.</p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Are prices fixed?</summary>
+                    <p>Prices depend on the treatment, the time required, and the patient’s specific needs, so we provide treatment-based estimates during consultation.</p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Do you offer emergency dental care?</summary>
+                    <p>Yes, we offer same-day emergency support where possible to help patients in urgent dental pain or discomfort.</p>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="contact">
+        <div class="container">
+            <div class="section-heading">
+                <span class="eyebrow">Contact</span>
+                <h2>Visit our friendly dental team</h2>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <h3>Location</h3>
+                    <p>Mokopane, Limpopo</p>
+                </div>
+
+                <div class="contact-card">
+                    <h3>Call us</h3>
+                    <p>+27 66 604 0199</p>
+                    <p>+27 66 376 3276</p>
+                </div>
+
+                <div class="contact-card">
+                    <h3>Email</h3>
+                    <p>info@toothwise.co.za</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<div class="floating-actions">
+    <a class="floating-btn floating-whatsapp" href="https://wa.me/27666040199?text=Hello%20Toothwise%20Dental%20Studio%2C%20I%20would%20like%20to%20book%20an%20appointment." target="_blank" aria-label="WhatsApp">💬</a>
+    <a class="floating-btn floating-call" href="tel:+27666040199" aria-label="Call now">📞</a>
+</div>
+
+<footer>
+    <div class="container">
+        <div class="footer-links">
+            <a href="HOME%20.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="services.html">Services</a>
+            <a href="booking.html">Booking</a>
+            <a href="contact.html">Contact</a>
+            <a href="login.html">Login</a>
+        </div>
+        <p>© 2026 Toothwise Dental Studio. All Rights Reserved.</p>
+    </div>
+</footer>
+
+<script>
+function bookAppointment(event) {
+    event.preventDefault();
+    alert("Thank you! Your appointment request has been submitted.");
+    event.target.reset();
+}
+</script>
+
+</body>
+</html>
